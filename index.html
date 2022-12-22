@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="container"
+      style="display: flex; flex-direction: column; align-items: center"
+    >
+      <h1 style="color: rgb(66, 68, 78)">HLS Video player</h1>
+      <video id="video" width="800" controls></video>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+
+    <script>
+      const video = document.getElementById('video');
+      const videoSrc = './assets/video/rigor_motion_final_render.m3u8';
+      if (Hls.isSupported()) {
+        console.log('Hls is supported');
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        window.hls = hls;
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+      }
+    </script>
+  </body>
+</html>
